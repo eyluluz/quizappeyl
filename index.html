@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Enkel visa/dölj-logik */
+      .view {
+        display: none;
+      }
+      .view.active {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- STARTSIDA -->
+    <div id="start-view" class="view active">
+      <h1>Quiz App</h1>
+      <p>Testa dina kunskaper!</p>
+      <button id="start-btn">Starta Quiz</button>
+    </div>
+
+    <!-- QUIZSIDA -->
+    <div id="quiz-view" class="view">
+      <div id="question-number">Fråga 1 av 15</div>
+      <div id="score-display">Poäng: 0</div>
+      <div id="category">Kategori</div>
+      <h2 id="question-text">Frågan visas här</h2>
+
+      <div id="options-container">
+        <!-- Svarsalternativ genereras av JavaScript -->
+      </div>
+
+      <div id="feedback" class="hidden">
+        <!-- Feedback visas här -->
+      </div>
+
+      <button id="next-btn">Nästa fråga</button>
+    </div>
+
+    <!-- RESULTATSIDA -->
+    <div id="result-view" class="view">
+      <h2>Quiz slutförd!</h2>
+      <div id="score-container">
+        <p>Din poäng:</p>
+        <p id="final-score">0/15</p>
+        <p id="percentage">0%</p>
+      </div>
+      <p id="feedback-message">Feedback kommer här</p>
+      <button id="restart-btn">Starta om</button>
+    </div>
+
+    <script type="module" src="src/main.js"></script>
+  </body>
+</html>
