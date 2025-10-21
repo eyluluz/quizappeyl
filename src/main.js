@@ -7,6 +7,8 @@
 import * as Quiz from "./modules/quiz.js";
 import * as UI from "./modules/ui.js";
 
+let timerUpdateInterval = null;
+
 // Hämta knappar
 const startBtn = document.getElementById("start-btn");
 const nextBtn = document.getElementById("next-btn");
@@ -24,6 +26,17 @@ startBtn.addEventListener("click", () => {
   const firstQuestion = Quiz.init();
   UI.renderQuestion(firstQuestion);
   UI.showView("quiz");
+
+    // Starta timer
+  Quiz.startTimer();
+
+// Uppdatera UI varje sekund
+  timerUpdateInterval = setInterval(() => {
+    const elapsed = Quiz.getElapsedTime();
+    const timeString = Quiz.formatTime(elapsed);
+    UI.updateTimer(timeString);
+  }, 1000);
+
 });
 
 // TODO 2: Svarsalternativ - validera svar
@@ -57,8 +70,12 @@ optionsContainer.addEventListener("click", (e) => {
     UI.updateScore(newScore);
   }
 
+// Hämta rätt svar
+  const currentQuestion = Quiz.getCurrentQuestion();
+  const correctIndex = currentQuestion.question.correctAnswer;
+  
   // Visa feedback
-  UI.showFeedback(button, isCorrect);
+  UI.showFeedback(button, isCorrect, correctIndex);
 
   // Förhindra fler klick
   answered = true;
@@ -84,11 +101,23 @@ nextBtn.addEventListener("click", () => {
     UI.renderQuestion(nextQuestionData);
     answered = false;
   } else {
+
+     // Stoppa timer när quiz är slut 
+    Quiz.stopTimer();
+    if (timerUpdateInterval) {
+      clearInterval(timerUpdateInterval);
+      timerUpdateInterval = null;
+    }
+
     // Inga fler frågor - visa resultat
     const finalScore = Quiz.getFinalScore();
     const message = Quiz.getFeedbackMessage(finalScore.percentage);
-    UI.showResult(finalScore, message);
-  }
+    console.log('Elapsed time:', Quiz.getElapsedTime()); // TEST
+
+  const timeString = Quiz.formatTime(Quiz.getElapsedTime()); 
+  console.log('Time string:', timeString); // TEST
+
+  UI.showResult(finalScore, message, timeString);  }
 });
 
 // TODO 4: Omstartsknapp - börja om från början
@@ -100,10 +129,26 @@ restartBtn.addEventListener("click", () => {
   // TIPS: Återställ answered = false
 
   // KOD HÄR
+ // Stoppa gammal timer 
+  Quiz.stopTimer();
+  if (timerUpdateInterval) {
+    clearInterval(timerUpdateInterval);
+    timerUpdateInterval = null;
+  }
+
+  UI.resetQuiz();
   const firstQuestion = Quiz.init();
   UI.renderQuestion(firstQuestion);
   UI.showView("quiz");
   answered = false;
+
+
+  Quiz.startTimer();
+  timerUpdateInterval = setInterval(() => {
+    const elapsed = Quiz.getElapsedTime();
+    const timeString = Quiz.formatTime(elapsed);
+    UI.updateTimer(timeString);
+  }, 100);
 });
 
 // Initialt state - visa startsida

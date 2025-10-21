@@ -6,6 +6,10 @@
 
 import { getAllQuestions } from "./questions.js";
 
+let timerInterval = null;
+let startTime = 0;
+let elapsedTime = 0;
+
 // State - håller koll på nuvarande quiz-tillstånd
 let state = {
   questions: [],
@@ -16,10 +20,14 @@ let state = {
 
 // Initiera quiz - hämta frågor och återställ state
 export function init() {
-  state.questions = getAllQuestions();
+    const allQuestions = getAllQuestions();
+
+  state.questions = shuffleArray(allQuestions);
   state.currentIndex = 0;
   state.score = 0;
   state.totalQuestions = state.questions.length;
+
+  resetTimer();
 
   return getCurrentQuestion();
 }
@@ -111,12 +119,52 @@ export function getFeedbackMessage(percentage) {
 }
 
 // VALFRITT FÖR AVANCERAD NIVÅ: Randomisera frågeordning
-export function shuffleQuestions() {
-  for (let i = state.questions.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [state.questions[i], state.questions[j]] = [
-      state.questions[j],
-      state.questions[i],
-    ];
+
+    // Funktion 1: Blanda en array med Fisher-Yates algoritm
+   export function shuffleArray(array) {
+      // 1. Kopiera array med spread operator för att inte mutera originalet
+      const shuffled = [...array];
+      
+      // 2. Loop bakifrån (från sista indexet till 1)
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        // 3. Välj ett random index mellan 0 och i
+        const j = Math.floor(Math.random() * (i + 1));
+        
+        // 4. Byt plats mellan element på index i och j
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      
+      // 5. Returnera den blandade arrayen
+      return shuffled;
+    }
+
+export function startTimer() {
+  startTime = Date.now() - elapsedTime;
+  timerInterval = setInterval(() => {
+    elapsedTime = Date.now() - startTime;
+  }, 100); // Uppdatera varje 100ms
+}
+
+export function stopTimer() {
+  if (timerInterval) {
+    clearInterval(timerInterval);
+    timerInterval = null;
   }
+}
+
+export function resetTimer() {
+  stopTimer();
+  elapsedTime = 0;
+  startTime = 0;
+}
+
+export function getElapsedTime() {
+  return elapsedTime;
+}
+
+export function formatTime(milliseconds) {
+  const totalSeconds = Math.floor(milliseconds / 1000);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 }

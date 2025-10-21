@@ -67,7 +67,7 @@ Endast **en vy visas åt gången** (växlas med JavaScript).
   <h1 class="text-4xl font-bold text-center mb-4">Quiz App</h1>
   <p class="text-lg text-center mb-8">Testa dina kunskaper!</p>
   <button id="start-btn" 
-          class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg">
+          class="bg-blue-600 hover:bg-blue-700 text-white content-center font-bold py-3 px-6 rounded-lg">
     Starta Quiz
   </button>
 </div>
