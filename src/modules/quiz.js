@@ -142,7 +142,7 @@ export function startTimer() {
   startTime = Date.now() - elapsedTime;
   timerInterval = setInterval(() => {
     elapsedTime = Date.now() - startTime;
-  }, 100); // Uppdatera varje 100ms
+  }, 1000); // Uppdatera varje 1000ms
 }
 
 export function stopTimer() {

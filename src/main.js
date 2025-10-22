@@ -28,6 +28,7 @@ startBtn.addEventListener("click", () => {
   UI.showView("quiz");
 
     // Starta timer
+    
   Quiz.startTimer();
 
 // Uppdatera UI varje sekund
@@ -148,7 +149,7 @@ restartBtn.addEventListener("click", () => {
     const elapsed = Quiz.getElapsedTime();
     const timeString = Quiz.formatTime(elapsed);
     UI.updateTimer(timeString);
-  }, 100);
+  }, 1000);
 });
 
 // Initialt state - visa startsida
