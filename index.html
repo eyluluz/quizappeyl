@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quiz App</title>
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
       /* Enkel visa/dölj-logik */
@@ -15,32 +16,38 @@
       }
     </style>
   </head>
-  <body class="min-h-screen bg-gradient-to-br from-blue-300 via-green-100 to-white-100">
+  <body class="min-h-screen bg-gradient-to-br from-[#94E9DE] via-[#EEAEAE] to-[#FC79B2]">
     <!-- STARTSIDA -->
     <div id="start-view" class="view active p-6">
-      <h1 class="text-4xl font-bold text-center mb-4">Quiz App</h1>
-      <p class="text-lg text-center mb-8">Testa dina kunskaper!</p>
-      <button id="start-btn" class="block mx-auto border-2 border-blue-900 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-200 hover:scale-105 transform">Starta Quiz</button>
+           <div class="max-w-lg mx-auto block border-2 rounded-lg mt-10 p-6 bg-white/10 shadow-md shadow-sky-900/30 backdrop-blur-md"> 
+
+      <h1 class=" text-4xl font-bold text-center mb-4 text-white ">Quiz App</h1>
+      <p class=" text-lg text-center mb-8 text-white">Testa dina kunskaper!</p>
+      <button id="start-btn" class=" block mx-auto border-2 border-white/50 bg-white/20 shadow-md shadow-sky-900/30 backdrop-blur-md p-3 hover:bg-white/30 transition rounded-lg text-white
+       font-bold px-6 duration-200 hover:scale-105 transform ">Starta Quiz</button>
     </div>
+</div>
 
     <!-- QUIZSIDA -->
    <div id="quiz-view" class="view p-6">
-  <div class="flex justify-between items-center border p-2 mb-3"> 
-    <div id="question-number" class="text-lg">Fråga 1 av 18</div>
+        <div class="max-w-lg mx-auto block border-2 rounded-lg mt-10 p-6 bg-white/10 shadow-md shadow-sky-900/30 backdrop-blur-md"> 
+
+  <div class="flex justify-between items-center border p-2 mb-3 rounded-lg shadow-md bg-white/10"> 
+    <div id="question-number" class=" text-lg text-white">Fråga 1 av 18</div>
     <div class="flex gap-4">
-      <div id="timer-display" class="text-lg">⏱️ 0:00</div>
-      <div id="score-display" class="text-lg">Poäng: 0</div>
+      <div id="timer-display" class=" text-lg text-white">⏱️ 0:00</div>
+      <div id="score-display" class=" text-lg text-white">Poäng: 0</div>
     </div>
   </div>
       
   <!-- Progress bar -->
-  <div class="w-full bg-gray-200 rounded-full h-4 mb-5">
-    <div id="progress-bar" class="bg-blue-600 h-4 rounded-full transition-all duration-300" style="width: 0%"></div>
+  <div class="w-full bg-gray-200 rounded-full h-4 mb-5 shadow-md">
+    <div id="progress-bar" class="bg-pink-300 h-4 rounded-full transition-all duration-300" style="width: 0%"></div>
   </div>
 
 
-      <div id="category" class="text-lg text-center mb-8">Kategori</div>
-      <h2 id="question-text" class="text-lg text-center mb-8">Frågan visas här</h2>
+      <div id="category" class=" text-lg text-center mb-8 text-white">Kategori</div>
+      <h2 id="question-text" class=" text-center mb-8 text-white">Frågan visas här</h2>
 
       <div id="options-container" class="space-y-3 mb-5">
         <!-- Svarsalternativ genereras av JavaScript -->
@@ -50,22 +57,26 @@
         <!-- Feedback visas här -->
       </div>
 
-      <button id="next-btn" class="hidden block mx-auto bg-blue-400 hover:bg-blue-500 border-2 border-blue-600 text-white font-bold py-3 px-6 rounded-lg transition duration-200 hover:scale-105 transform">Nästa fråga</button>
+      <button id="next-btn" class="block mx-auto border-2 border-white/50 bg-white/20 shadow-md shadow-sky-900/30 backdrop-blur-md p-3 hover:bg-white/30 transition rounded-lg text-white
+       font-bold px-6 duration-200 hover:scale-105 transform ">Nästa fråga</button>
     </div>
+</div>
 
     <!-- RESULTATSIDA -->
     <div id="result-view" class="view p-6 text-center ">
-      <h2 class="text-2xl font-bold mb-5">Quiz slutförd!</h2>
+           <div class="max-w-lg mx-auto block border-2 rounded-lg mt-10 p-6 bg-white/10 shadow-md shadow-sky-900/30 backdrop-blur-md">  
+      <h2 class="text-2xl font-bold mb-5 text-white">Quiz slutförd!</h2>
       <div id="score-container">
-        <p>Din poäng:</p>
-        <p id="final-score" class="mb-5">0/18</p>
-        <p id="percentage" class="mb-5">0%</p>
-        <p id="final-time" class="mb-5">⏱️ Tid: 0:00</p>
+        <p class="text-white">Din poäng:</p>
+        <p id="final-score" class="mb-5 text-white">0/18</p>
+        <p id="percentage" class="mb-5 text-white">0%</p>
+        <p id="final-time" class="mb-5 text-white">⏱️ Tid: 0:00</p>
       </div>
-      <p id="feedback-message" class="mb-5">Feedback kommer här</p>
-      <button id="restart-btn" class="block mx-auto border-2 border-blue-900 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-200 hover:scale-105 transform">Starta om</button>
+      <p id="feedback-message" class="mb-5 text-white">Feedback kommer här</p>
+      <button id="restart-btn" class="block mx-auto border-2 border-white/50 bg-white/20 shadow-md shadow-sky-900/30 backdrop-blur-md p-3 hover:bg-white/30 transition rounded-lg text-white
+       font-bold px-6 duration-200 hover:scale-105 transform">Starta om</button>
     </div>
-
+</div>
     <script type="module" src="src/main.js"></script>
   </body>
 </html>

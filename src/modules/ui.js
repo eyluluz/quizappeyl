@@ -13,7 +13,7 @@ const finalTime = document.getElementById("final-time");
 const timerDisplay = document.getElementById("timer-display");
 const progressBar = document.getElementById("progress-bar");
 const questionNumber = document.getElementById("question-number");
-const scoreDisplay = document.getElementById("score-display");
+const scopinkisplay = document.getElementById("score-display");
 const categoryEl = document.getElementById("category");
 const questionText = document.getElementById("question-text");
 const optionsContainer = document.getElementById("options-container");
@@ -67,7 +67,7 @@ export function renderQuestion(questionData) {
     button.textContent = option;
     button.dataset.index = index;
      button.className =
-      "w-full text-left border border-gray-300 bg-white p-3 hover:bg-blue-100 cursor-pointer transition";
+      " w-full text-left border-2 border-white/50 bg-white/20 shadow-md shadow-sky-900/30 backdrop-blur-md p-3 hover:bg-white/30 cursor-pointer transition rounded-lg text-white";
 
     optionsContainer.appendChild(button);
   });
@@ -82,29 +82,29 @@ export function renderQuestion(questionData) {
 export function showFeedback(button, isCorrect, correctIndex) {
   // TIPS: Ändra button-klasserna beroende på om svaret är rätt eller fel
   // TIPS: Visa feedbackEl och lägg till text
-  // TIPS: Använd Tailwind-klasser för färger (t.ex. bg-green-100, border-green-500)
+  // TIPS: Använd Tailwind-klasser för färger (t.ex. bg-teal-100, border-teal-500)
 
   // KOD HÄR
   if (isCorrect) {
     feedbackEl.textContent = "✅ Rätt!";
     feedbackEl.classList.remove("hidden");
-    feedbackEl.classList.remove("bg-red-100", "border-red-500");
-    feedbackEl.classList.add("bg-green-100", "border-green-500");
+    feedbackEl.classList.remove("bg-pink-100", "border-pink-400", "text-pink-800");
+    feedbackEl.classList.add("bg-teal-100", "border-teal-400", "text-teal-800", "rounded-lg", "shadow-md");
     const allButtons = optionsContainer.querySelectorAll("button");
-    allButtons[correctIndex].classList.add("bg-green-100", "border-green-500", "text-green-800", "hover:bg-green-200");
+    allButtons[correctIndex].classList.add("bg-teal-100", "border-teal-400", "text-teal-800", "hover:bg-teal-200");
   } else {
     // Gör fel svar röd
-    button.classList.add("bg-red-100", "border-red-500", "text-red-800", "hover:bg-red-200");
+    button.classList.add("bg-pink-100", "border-pink-400", "text-pink-800", "hover:bg-pink-200");
 
     // fel feedback
     feedbackEl.textContent = "❌ Fel!";
     feedbackEl.classList.remove("hidden");
-    feedbackEl.classList.remove("bg-green-100", "border-green-500");
-    feedbackEl.classList.add("bg-red-100", "border-red-500");
+    feedbackEl.classList.remove("bg-teal-100", "border-teal-400", "text-teal-800");
+    feedbackEl.classList.add("bg-pink-100", "border-pink-400", "text-pink-800", "rounded-lg", "shadow-md");
 
     // Visa rätt svar 
     const allButtons = optionsContainer.querySelectorAll("button");
-    allButtons[correctIndex].classList.add("bg-green-100", "border-green-500", "text-green-800", "hover:bg-green-200");
+    allButtons[correctIndex].classList.add("bg-teal-100", "border-teal-400", "text-teal-800", "hover:bg-teal-200");
   }
 
     nextBtn.classList.remove("hidden");
@@ -114,16 +114,16 @@ export function showFeedback(button, isCorrect, correctIndex) {
 
 // TODO 3: IMPLEMENTERA showResult()
 // Visa resultatskärmen med poäng och procent
-// Parameter: finalScoreData (objekt med score, total, percentage), message (feedbacktext)
-export function showResult(finalScoreData, message, timeString) {
+// Parameter: finalScopinkata (objekt med score, total, percentage), message (feedbacktext)
+export function showResult(finalScopinkata, message, timeString) {
   // TIPS: Uppdatera finalScore.textContent med "X/Y"
   // TIPS: Uppdatera percentage.textContent med "Z%"
   // TIPS: Uppdatera feedbackMessage.textContent
   // TIPS: Anropa showView('result')
 
   // KOD HÄR
-  finalScore.textContent = `${finalScoreData.score}/${finalScoreData.total}`;
-  percentage.textContent = `${finalScoreData.percentage}%`;
+  finalScore.textContent = `${finalScopinkata.score}/${finalScopinkata.total}`;
+  percentage.textContent = `${finalScopinkata.percentage}%`;
    finalTime.textContent = `⏱️ Tid: ${timeString}`;
   feedbackMessage.textContent = message;
 
@@ -134,16 +134,16 @@ export function showResult(finalScoreData, message, timeString) {
 // Uppdatera poängvisningen under quiz
 // Parameter: score (nuvarande poäng)
 export function updateScore(score) {
-  // TIPS: Uppdatera scoreDisplay.textContent
+  // TIPS: Uppdatera scopinkisplay.textContent
 
   // KOD HÄR
-  scoreDisplay.textContent = `Poäng: ${score}`;
+  scopinkisplay.textContent = `Poäng: ${score}`;
 }
 
 // TODO 5: IMPLEMENTERA resetQuiz()
 // Återställ quiz-gränssnittet
 export function resetQuiz() {
-  scoreDisplay.textContent = "Poäng: 0";
+  scopinkisplay.textContent = "Poäng: 0";
   feedbackEl.classList.add("hidden");
   nextBtn.classList.add("hidden");
   optionsContainer.innerHTML = "";
